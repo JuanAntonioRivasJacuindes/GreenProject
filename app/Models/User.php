@@ -9,14 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
-use Filament\Models\Contracts\HasName;
-class User extends Authenticatable implements FilamentUser, HasAvatar
+
+class User extends Authenticatable
 {
-   
-    use HasRoles;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
