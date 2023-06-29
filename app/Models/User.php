@@ -10,9 +10,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-
-class User extends Authenticatable
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\HasName;
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
+   
     use HasRoles;
     use HasApiTokens;
     use HasFactory;
@@ -25,6 +28,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function canAccessFilament(): bool
+    {
+       
+        return $this->hasPermissionTo('access_to_filament');
+    }
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url;
+    }
     protected $fillable = [
         'name',
         'email',
